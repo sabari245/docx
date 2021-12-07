@@ -41,7 +41,6 @@ while True:
             paragraph.add_run(str(current))
             current += 1
         except Exception as e:
-            print(e)
             print(TEMPLATE.format(num=current), 'doesn\'t exists')
             current += 1
             continue
