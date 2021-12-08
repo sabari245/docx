@@ -15,8 +15,8 @@ doc = docx.Document()
 
 # Creating a table object
 table = doc.add_table(rows=ROWS * 2, cols=COLS)
-  
-#looping over the images
+
+# looping over the images
 current = INITIAL
 rows = 0
 while True:
@@ -31,26 +31,27 @@ while True:
             paragraph = image_cell.paragraphs[0]
             run = paragraph.add_run()
             run.add_picture(
-                "./data/images/" + TEMPLATE.format(num=current), 
-                width=Inches(WIDTH * 0.393701), 
+                "./data/images/" + TEMPLATE.format(num=current),
+                width=Inches(WIDTH * 0.393701),
                 height=Inches(HEIGHT * 0.393701)
             )
 
-            text_cell = table.rows[rows+1].cells[columns]
+            text_cell = table.rows[rows + 1].cells[columns]
             paragraph = text_cell.paragraphs[0]
             paragraph.add_run(str(current))
             current += 1
-        except Exception as e:
+        except:
             print(TEMPLATE.format(num=current), 'doesn\'t exists')
             current += 1
             continue
         columns += 1
-        if(columns >= COLS): break
+        if columns >= COLS:
+            break
     rows += 1
-    if(rows >= ROWS * 2): break
-    if(current >= FINAL): break
+    if rows >= ROWS * 2:
+        break
+    if current >= FINAL:
+        break
 
-
-  
 # Now save the document to a location
 doc.save(f'./data/{NAME_OF_FILE}.docx')
